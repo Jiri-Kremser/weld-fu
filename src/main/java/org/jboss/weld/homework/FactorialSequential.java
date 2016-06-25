@@ -8,7 +8,7 @@ import java.math.BigInteger;
  * Created by jkremser on 6/25/16.
  */
 @Model
-public class FactorialImpl implements Factorial {
+public class FactorialSequential implements Factorial {
 
     @Inject
     MathOperations mathOperations;

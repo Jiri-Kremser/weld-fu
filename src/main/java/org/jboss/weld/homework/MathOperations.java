@@ -1,11 +1,19 @@
 package org.jboss.weld.homework;
 
 import java.math.BigInteger;
+import java.util.concurrent.Future;
 
+import javax.ejb.AsyncResult;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 @Stateless
 public class MathOperations {
+
+    @Inject
+    @Parallel
+    private Factorial parallelFactorial;
 
     /**
      * Returns a result of multiplication of a sequence of (from * (from + 1) * (from + 2) ... (to -1) * to)
@@ -27,5 +35,16 @@ public class MathOperations {
         }
 
         return result;
+    }
+
+
+    /**
+     * Returns a result n! calculated in parallel by 2 threads
+     * @param input the n
+     */
+    @Asynchronous
+    public Future<BigInteger> parallelFactorial(long input) {
+        BigInteger result = parallelFactorial.compute(input);
+        return new AsyncResult<>(result);
     }
 }
