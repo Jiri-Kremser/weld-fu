@@ -5,6 +5,8 @@ import org.jboss.weld.homework.Factorial;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 
 /**
@@ -30,6 +32,8 @@ public class FactorialModel {
         this.result = null;
     }
 
+    @NotNull
+    @Min(0)
     public Long getInput() {
         return input;
     }
