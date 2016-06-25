@@ -1,18 +1,28 @@
 package org.jboss.weld.homework.view;
 
+import org.jboss.weld.homework.Factorial;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.math.BigInteger;
 
 /**
  * Backing bean for the factorial form (factorial.xhtml)
  */
-// TODO: turn this class into a named bean with name "factorial"
+@ApplicationScoped
+@Named("factorial")
 public class FactorialModel {
 
     private Long input;
     private BigInteger result;
 
+    @Inject
+    private Factorial factorial;
+
     public void compute() {
-        // TODO: implement using Factorial bean
+        BigInteger result = factorial.compute(getInput());
+        this.result = result;
     }
 
     public void reset() {
